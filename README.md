@@ -1,12 +1,12 @@
 # Service Hook Grafana
-### Alert webhook grafana send to line massage 
+### ทดสอบเชื่อมต่อ WebHook Grafana เพื่อส่งข้อมูลเข้า Line Notify 
 -----------------------------------------------------------------------
- -- Install --
+ -- รันคำสั่ง --
  - npm install
 -----------------------------------------------------------------------
-### Env File 
+### สร้าง Env File 
 -----------------------------------------------------------------------
-- LINE_URL="<Line Notify Url>"
-- LINE_TOKEN="<You Token Line Notify>"
+- เพิ่ม LINE_URL="<Line Notify Url>"
+- เพิ่ม LINE_TOKEN="<You Token Line Notify>"
 -----------------------------------------------------------------------
-จัดทำโดย Oatsadayut ice
+* Oatsadayut ice *
