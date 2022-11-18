@@ -1,9 +1,19 @@
 require('dotenv').config()
 const axios = require('axios');
+const setMessage = require('./message');
 
-const lineNotify = async (value) => {
-    let statusCode;
-    let messageCode;
+let stCode;
+let mesCode;
+
+const sendLine = async (data) => { 
+    for (let d of data.alerts) {
+        let message = await setMessage(d)
+        await lineNotify(message) 
+    }
+    return {stCode, mesCode}
+}
+
+const lineNotify = async (msg) => {
     try {
         const LINE_NOTIFY_URL = process.env.LINE_URL
         const LINE_TOKEN = process.env.LINE_TOKEN
@@ -11,18 +21,16 @@ const lineNotify = async (value) => {
             'Content-Type': `application/x-www-form-urlencoded`,
             'Authorization': `Bearer ${LINE_TOKEN}`
         }
-        let msg = value;
         const send = await axios.post(LINE_NOTIFY_URL, {
             message: msg
         }, {
             headers: headers
         })
-        statusCode = send.status
+        stCode = send.status
     } catch (error) {
-        statusCode = error.response.data.status
-        messageCode = error.response.data.message
+        stCode = error.response.data.status
+        mesCode = error.response.data.message
     }
-    return { statusCode, messageCode }
 }
 
-module.exports = lineNotify;
+module.exports = sendLine;
